@@ -14,4 +14,4 @@ line improves my work flow.
 https://jupyter.org/
 
 Jupyter Notebook helps organize a project and make the code more readable, as if it is a pdf. It makes code easy to share and is good
-for tutorials because of it makes the code seem like an interactive web page.
+for tutorials because it makes the code seem like an interactive web page.
