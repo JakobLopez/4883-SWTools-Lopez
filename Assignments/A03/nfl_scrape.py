@@ -20,7 +20,9 @@ gameIDs = {
 f = open("gameIDs.json","w")
 
 """
-Gets gameID for every game
+Gets gameID for every game on url page.
+Uses gameID to access game data.
+Write every game to a folder
 Params:
     year - year to get gameIDs from
     stype - season type: REG or POST
@@ -38,10 +40,14 @@ def scrape_data(year, stype, week = None):
 
     #Get list of div tags where 'class' = 'schedules-list-content'
     divs = page.find_all('div',{'class':'schedules-list-content'})
-    #Appends every game's gameID to list in dictionary from URL
+    #Loops through every game on page
     for div in divs:
+        #Appends to list
         gameIDs[stype].append(div['data-gameid'])
+
+        #URL to json game data
         url = 'http://www.nfl.com/liveupdate/game-center/%s/%s_gtd.json' % (div['data-gameid'],div['data-gameid'])
+        #Write to folder
         urllib.request.urlretrieve(url, 'game_data/'+div['data-gameid']+'.json')
 
 
