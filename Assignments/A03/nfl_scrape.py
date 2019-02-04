@@ -7,7 +7,7 @@ import requests
 scraper = BeautifulScraper()
 
 #Years 2009 to 2018
-years = list(range(2009, 2018))
+years = list(range(2009, 2019))
 
 weeks = list(range(1,18))
 
