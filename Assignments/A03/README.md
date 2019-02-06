@@ -3,7 +3,7 @@
 <ul>Files
     <li>
     nfl_scrape.py -    
-        Use `pip install beautifulscraper` before running
+        Use "pip install beautifulscraper" before running
         This program gets game-ids from http://www.nfl.com/schedules for post and regular season games from 2009 to 2018. The game-ids
         are needed to access a JSON item that contains all game data, where the url is in the form  
         http://www.nfl.com/liveupdate/game-center/game-id/game-id_gtd.json
