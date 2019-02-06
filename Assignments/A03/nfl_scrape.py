@@ -1,3 +1,17 @@
+"""
+Course: cmps 4883
+Assignemt: A03
+Date: 2/05/19
+Github username: JakobLopez
+Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
+Name: Jakob Lopez
+Description: 
+    NFL provides JSON data that contains detailed game information
+    for every single game played. This program collects every JSON
+    item for each game from 2009 to 2018 and places them in a folder.
+    Using knowledge of the NFL website URL, the game-id for every game
+    is collected and used to access the JSON items
+"""
 from beautifulscraper import BeautifulScraper
 from pprint import pprint
 import json
