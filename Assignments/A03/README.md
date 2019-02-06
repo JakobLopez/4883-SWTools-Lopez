@@ -1,7 +1,8 @@
 
 
-Files
-  nfl_scrape.py
+Files<br>
+    nfl_scrape.py
+    <p>
     Use 'pip install beautifulscraper' before running
     This program gets game-ids from http://www.nfl.com/schedules for post and regular season games from 2009 to 2018. The game-ids
     are needed to access a JSON item that contains all game data, where the url is in the form  
@@ -12,6 +13,7 @@ Files
 
     The game-ids are also saved to a dictionary with top keys being POST and REG to organize the data. Json is imported to dump the 
     game-id dictionary to a file called gameIDs.json.
+    </p>
     
   game_data
     Not uploaded to GitHub. Folder created from nfl_scrape.py. Contains all JSON game data as files
