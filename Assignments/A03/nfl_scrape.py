@@ -32,6 +32,8 @@ Params:
     year - year to get gameIDs from
     stype - season type: REG or POST
     week - week to get gameIDs from (only for REG season)
+Returns:
+    Nothing, but does add game IDs to global dictionary
 """
 def scrape_data(year, stype, week = None):
     #URL is different depending on season type
