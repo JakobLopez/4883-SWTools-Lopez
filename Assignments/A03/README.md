@@ -15,7 +15,7 @@
 
   <li>  
   game_data - 
-    Not uploaded to GitHub. Folder created from nfl_scrape.py. Contains all JSON game data as files
+    Not uploaded to GitHub. Create this folder before running nfl_scrape.py. Contains all JSON game data as files
   </li>
   <li> 
   gameIds.json
