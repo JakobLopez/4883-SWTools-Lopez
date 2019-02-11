@@ -1,37 +1,98 @@
 {
-    "PIT": {},
-    "TEN": {},
-    "ATL": {},
-    "MIA": {},
-    "BAL": {},
-    "KC": {},
-    "CAR": {},
-    "PHI": {},
-    "CIN": {},
-    "DEN": {},
-    "CLE": {},
-    "MIN": {},
-    "HOU": {},
-    "NYJ": {},
-    "IND": {},
-    "JAC": {},
-    "NO": {},
-    "DET": {},
-    "TB": {},
-    "DAL": {},
-    "ARI": {},
-    "SF": {},
-    "NYG": {},
-    "WAS": {},
-    "SEA": {},
-    "STL": {},
-    "GB": {},
-    "CHI": {},
-    "NE": {},
-    "BUF": {},
-    "OAK": {},
-    "SD": {},
-    "LA": {},
-    "JAX": {},
-    "LAC": {}
+    "PIT": {
+        "penalties": 1040
+    },
+    "TEN": {
+        "penalties": 1036
+    },
+    "ATL": {
+        "penalties": 917
+    },
+    "MIA": {
+        "penalties": 978
+    },
+    "BAL": {
+        "penalties": 1159
+    },
+    "KC": {
+        "penalties": 1073
+    },
+    "CAR": {
+        "penalties": 987
+    },
+    "PHI": {
+        "penalties": 1133
+    },
+    "CIN": {
+        "penalties": 1062
+    },
+    "DEN": {
+        "penalties": 1156
+    },
+    "CLE": {
+        "penalties": 1021
+    },
+    "MIN": {
+        "penalties": 977
+    },
+    "HOU": {
+        "penalties": 1063
+    },
+    "NYJ": {
+        "penalties": 1047
+    },
+    "IND": {
+        "penalties": 976
+    },
+    "JAX": {
+        "penalties": 980
+    },
+    "NO": {
+        "penalties": 1063
+    },
+    "DET": {
+        "penalties": 1117
+    },
+    "TB": {
+        "penalties": 1128
+    },
+    "DAL": {
+        "penalties": 1124
+    },
+    "ARI": {
+        "penalties": 1051
+    },
+    "SF": {
+        "penalties": 1137
+    },
+    "NYG": {
+        "penalties": 966
+    },
+    "WAS": {
+        "penalties": 1032
+    },
+    "SEA": {
+        "penalties": 1286
+    },
+    "LA": {
+        "penalties": 1167
+    },
+    "GB": {
+        "penalties": 1040
+    },
+    "CHI": {
+        "penalties": 1036
+    },
+    "NE": {
+        "penalties": 1014
+    },
+    "BUF": {
+        "penalties": 1087
+    },
+    "OAK": {
+        "penalties": 1287
+    },
+    "LAC": {
+        "penalties": 1040
+    }
 }
