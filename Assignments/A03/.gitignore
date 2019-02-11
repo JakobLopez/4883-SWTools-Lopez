@@ -4,3 +4,5 @@ game_data/
 gameIDs.json
 
 .vscode/
+
+__pycache__/
