@@ -1,98 +1,130 @@
 {
     "PIT": {
-        "penalties": 1040
+        "penalties": 1040,
+        "penalty yards": 9494
     },
     "TEN": {
-        "penalties": 1036
+        "penalties": 1036,
+        "penalty yards": 8949
     },
     "ATL": {
-        "penalties": 917
+        "penalties": 917,
+        "penalty yards": 8026
     },
     "MIA": {
-        "penalties": 978
+        "penalties": 978,
+        "penalty yards": 8409
     },
     "BAL": {
-        "penalties": 1159
+        "penalties": 1159,
+        "penalty yards": 9935
     },
     "KC": {
-        "penalties": 1073
+        "penalties": 1073,
+        "penalty yards": 8821
     },
     "CAR": {
-        "penalties": 987
+        "penalties": 987,
+        "penalty yards": 8491
     },
     "PHI": {
-        "penalties": 1133
+        "penalties": 1133,
+        "penalty yards": 9521
     },
     "CIN": {
-        "penalties": 1062
+        "penalties": 1062,
+        "penalty yards": 9047
     },
     "DEN": {
-        "penalties": 1156
+        "penalties": 1156,
+        "penalty yards": 9818
     },
     "CLE": {
-        "penalties": 1021
+        "penalties": 1021,
+        "penalty yards": 8699
     },
     "MIN": {
-        "penalties": 977
+        "penalties": 977,
+        "penalty yards": 8402
     },
     "HOU": {
-        "penalties": 1063
+        "penalties": 1063,
+        "penalty yards": 9252
     },
     "NYJ": {
-        "penalties": 1047
+        "penalties": 1047,
+        "penalty yards": 8803
     },
     "IND": {
-        "penalties": 976
+        "penalties": 976,
+        "penalty yards": 7996
     },
     "JAX": {
-        "penalties": 980
+        "penalties": 980,
+        "penalty yards": 8509
     },
     "NO": {
-        "penalties": 1063
+        "penalties": 1063,
+        "penalty yards": 9566
     },
     "DET": {
-        "penalties": 1117
+        "penalties": 1117,
+        "penalty yards": 9506
     },
     "TB": {
-        "penalties": 1128
+        "penalties": 1128,
+        "penalty yards": 9321
     },
     "DAL": {
-        "penalties": 1124
+        "penalties": 1124,
+        "penalty yards": 9040
     },
     "ARI": {
-        "penalties": 1051
+        "penalties": 1051,
+        "penalty yards": 8587
     },
     "SF": {
-        "penalties": 1137
+        "penalties": 1137,
+        "penalty yards": 9410
     },
     "NYG": {
-        "penalties": 966
+        "penalties": 966,
+        "penalty yards": 8342
     },
     "WAS": {
-        "penalties": 1032
+        "penalties": 1032,
+        "penalty yards": 8682
     },
     "SEA": {
-        "penalties": 1286
+        "penalties": 1286,
+        "penalty yards": 10867
     },
     "LA": {
-        "penalties": 1167
+        "penalties": 1167,
+        "penalty yards": 9922
     },
     "GB": {
-        "penalties": 1040
+        "penalties": 1040,
+        "penalty yards": 8876
     },
     "CHI": {
-        "penalties": 1036
+        "penalties": 1036,
+        "penalty yards": 8748
     },
     "NE": {
-        "penalties": 1014
+        "penalties": 1014,
+        "penalty yards": 8914
     },
     "BUF": {
-        "penalties": 1087
+        "penalties": 1087,
+        "penalty yards": 9203
     },
     "OAK": {
-        "penalties": 1287
+        "penalties": 1287,
+        "penalty yards": 10734
     },
     "LAC": {
-        "penalties": 1040
+        "penalties": 1040,
+        "penalty yards": 8390
     }
 }
