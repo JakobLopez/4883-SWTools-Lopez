@@ -64,6 +64,7 @@ def scrape_data(year, stype, week = None):
     divs = page.find_all('div',{'class':'schedules-list-content'})
     #Loops through every game on page
     for div in divs:
+        #Ignore pro bowl
         if div['data-away-abbr'] in ['APR', 'NPR', 'AFC', 'NFC', 'IRV', 'RIC', 'CRT', 'SAN']:
             pass
         else:
