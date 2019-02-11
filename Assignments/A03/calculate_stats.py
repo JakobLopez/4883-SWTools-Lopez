@@ -25,7 +25,8 @@ def writePlayerInfo():
 
     #Opens a file for writing
     g = open("player_info.json","w")
-
+    
+    
     #Opens file containing file paths from game_data
     with open('files.txt') as f:
         #Read every file path
@@ -35,7 +36,7 @@ def writePlayerInfo():
 
             #Gets file data
             data = openFileJson(line)
-
+            
             #Old season
             oldseason = 2009
             #Get current season year
@@ -95,8 +96,11 @@ def writePlayerInfo():
 
 def writeTeamInfo():
     teams = {}
+
     #Opens a file for writing
     g = open("team_info.json","w")
+
+    abbr = openFileJson('./team_abbrev.json')
 
     #Opens file containing file paths from game_data
     with open('files.txt') as f:
@@ -109,15 +113,23 @@ def writeTeamInfo():
             data = openFileJson(line)
             # pull out the game id and game data
             for gameid,gamedata in data.items():
-                if gameid != 'nextupdate':
-                    
-                    
+                if gameid != 'nextupdate':        
+                    #Get home and away teams 
                     home = gamedata['home']['abbr']
-                    away = gamedata['away']['abbr']
+                    away = gamedata['away']['abbr'] 
+                    #Check for correct abbreviation  
+                    home = abbr[home]                
+                    away = abbr[away]
+                    #If team not in dictionary, add them
                     if home not in teams:
                         teams[home] = {}
+                        teams[home]['penalties'] = 0
+                    teams[home]['penalties'] = teams[home]['penalties'] + gamedata['home']['stats']['team']['pen']
                     if away not in teams:
                         teams[away] = {}
+                        teams[away]['penalties'] = 0
+                    teams[away]['penalties'] = teams[away]['penalties'] + gamedata['away']['stats']['team']['pen']
+
      #Writes all game IDs
     g.write(json.dumps(teams))
 
@@ -149,7 +161,6 @@ def getPlayersWithMostTeamsInSingleYear():
                 players.append(tup)
 
     players = list(filter(lambda x: x[1] == size, players))
-
     return players
                   
 def getPlayerMostNegativeRush():
@@ -175,7 +186,6 @@ def getPlayerMostNegativeRushes():
     for playerid,playerdata in data.items():   
         for yards in playerdata['RushYards']:
             if yards != None and yards < 0:
-                #print(playerdata['Name'])
                 if playerid not in players:
                     players[playerid] = 1
                 else:
@@ -187,8 +197,7 @@ def getPlayerMostNegativeRushes():
     for k in players:
         if players[k] == highest_count:
             tup = (data[k]['Name'], players[k])
-            player_list.append(tup)
-           
+            player_list.append(tup)       
     return player_list
 
 def getPlayerMostNegativePasses():
@@ -214,13 +223,26 @@ def getPlayerMostNegativePasses():
           
     return player_list
 
+def getTeamMostPenalties():
+    team = []
+
+    data = openFileJson('./team_info.json')
+
+    most = 0
+    for t, tdata in data.items():
+        if tdata['penalties'] >= most:
+            most = tdata['penalties']
+            tup = (t,most)
+            team.append(tup)
+    #print(team)
+    team = list(filter(lambda x: x[1] == most, team))
+    return team
 
                 
 #Writes player info to JSON file
-writePlayerInfo()
-writeTeamInfo()
+#writePlayerInfo()
+#writeTeamInfo()
 
-"""
 print('=================================================================')
 print('1. Find the player(s) that played for the most teams.')
 player_max_team,num_teams = getPlayersWithMostTeams()
@@ -263,4 +285,11 @@ for player in players:
     print('%s has passed for negative yards %d times' % (player[0], player[1]))
 print('=================================================================') 
 print()
-"""
+
+print('=================================================================')
+print('6. Find the team with the most penalties.')
+teams = getTeamMostPenalties()
+for team in teams:
+    print('%s has a total of %d penalties' % (team[0], team[1]))
+print('=================================================================') 
+print()
