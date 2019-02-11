@@ -17,6 +17,7 @@ from pprint import pprint
 import json
 import urllib
 import requests
+import sys
 
 scraper = BeautifulScraper()
 
@@ -63,15 +64,15 @@ def scrape_data(year, stype, week = None):
     divs = page.find_all('div',{'class':'schedules-list-content'})
     #Loops through every game on page
     for div in divs:
-        #Appends to list
-        gameIDs[stype].append(div['data-gameid'])
-
-        #URL to json game data
-        url = 'http://www.nfl.com/liveupdate/game-center/%s/%s_gtd.json' % (div['data-gameid'],div['data-gameid'])
-        #Write to folder
-        #Each file named gameid.json
-        urllib.request.urlretrieve(url, 'game_data/'+div['data-gameid']+'.json')
-
+        if div['data-away-abbr'] in ['APR', 'NPR', 'AFC', 'NFC', 'IRV', 'RIC', 'CRT', 'SAN']:
+            pass
+        else:
+            gameIDs[stype].append(div['data-gameid'])
+            #URL to json game data
+            url = 'http://www.nfl.com/liveupdate/game-center/%s/%s_gtd.json' % (div['data-gameid'],div['data-gameid'])
+            #Write to folder
+            #Each file named gameid.json
+            urllib.request.urlretrieve(url, 'game_data/'+div['data-gameid']+'.json')
 
 #Loop through NFL years
 for year in years:
@@ -79,6 +80,7 @@ for year in years:
     #Loop through REG season weeks each year
     for week in weeks:
         scrape_data(year, 'REG', week)
+    
 
 #Writes all game IDs
 f.write(json.dumps(gameIDs))
