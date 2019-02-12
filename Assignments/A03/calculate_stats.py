@@ -69,13 +69,19 @@ def writePlayerInfo():
                                                 players[playerid]['TeamInfo'][year].append(info['clubcode'])     
                                                 players[playerid]['RushYards'] = []
                                                 players[playerid]['PassYards'] = []
-                                                players[playerid]['FieldGoals'] = []
+                                                players[playerid]['MadeFieldGoals'] = []
+                                                players[playerid]['MissedFieldGoals'] = 0
+                                                players[playerid]['DroppedPasses'] = 0
                                                 if info['statId'] == 10:
                                                     players[playerid]['RushYards'].append(info['yards'])
                                                 if info['statId'] == 15:
                                                     players[playerid]['PassYards'].append(info['yards'])
                                                 if info['statId'] == 70:
-                                                    players[playerid]['FieldGoals'].append(info['yards'])
+                                                    players[playerid]['MadeFieldGoals'].append(info['yards'])
+                                                if info['statId'] == 69:
+                                                    players[playerid]['MissedFieldGoals'] = players[playerid]['MissedFieldGoals'] + 1
+                                                if info['statId'] == 115 and 'pass' in playdata['desc'] and 'dropped' in playdata['desc']:
+                                                    players[playerid]['DroppedPasses'] = players[playerid]['DroppedPasses'] + 1
                                             #If player already in dicitionary    
                                             else:   
                                                 #If player is playing for new team
@@ -92,7 +98,11 @@ def writePlayerInfo():
                                                 if info['statId'] == 15:
                                                     players[playerid]['PassYards'].append(info['yards'])
                                                 if info['statId'] == 70:
-                                                    players[playerid]['FieldGoals'].append(info['yards'])
+                                                    players[playerid]['MadeFieldGoals'].append(info['yards'])
+                                                if info['statId'] == 69:
+                                                    players[playerid]['MissedFieldGoals'] = players[playerid]['MissedFieldGoals'] + 1
+                                                if info['statId'] == 115 and 'pass' in playdata['desc'] and 'dropped' in playdata['desc']:
+                                                    players[playerid]['DroppedPasses'] = players[playerid]['DroppedPasses'] + 1
 
      #Writes all game IDs
     g.write(json.dumps(players))
@@ -328,24 +338,55 @@ def getLongestFieldGoal():
     
     furthest = 0
     for player,playerdata in data.items():
-        for yard in playerdata['FieldGoals']:
+        for yard in playerdata['MadeFieldGoals']:
             if yard and yard >= furthest:
                 furthest = yard
                 tup = (playerdata['Name'],furthest)
                 players.append(tup)
     players = list(filter(lambda x: x[1] == furthest, players))
     return players
+
+def getMostMadeFieldGoals():
+    players = []
+    data = openFileJson('./player_info.json')
+
+    most = 0
+    for player,playerdata in data.items():
+        if len(playerdata['MadeFieldGoals']) >= most:
+            most = len(playerdata['MadeFieldGoals'])
+            tup = (playerdata['Name'],most)
+            players.append(tup)
+    players = list(filter(lambda x: x[1] == most, players))
+    return players
+
+def getMostMissedFieldGoals():
+    players = []
+    data = openFileJson('./player_info.json')
+
+    max_val = data[max(data, key = lambda x: data[x]['MissedFieldGoals'])]['MissedFieldGoals']
+
+    for player,playerdata in data.items():
+        if playerdata['MissedFieldGoals'] == max_val:
+            tup = (playerdata['Name'],max_val)
+            players.append(tup)
+    return players
+    
+def getPlayerMostDroppedPasses():
+    players = []
+    data = openFileJson('./player_info.json')
+
+    max_val = data[max(data, key = lambda x: data[x]['DroppedPasses'])]['DroppedPasses']
+    for player,playerdata in data.items():
+        if playerdata['DroppedPasses'] == max_val:
+            tup = (playerdata['Name'],max_val)
+            players.append(tup)
+    return players
     
 
-
-
-              
 #Writes player info to JSON file
 #writePlayerInfo()
 #writeTeamInfo()
 
-
-"""
 print('=================================================================')
 print('1. Find the player(s) that played for the most teams.')
 player_max_team,num_teams = getPlayersWithMostTeams()
@@ -430,7 +471,32 @@ print('=================================================================')
 print('10. Longest field goal.')
 players = getLongestFieldGoal()
 for player in players:
-    print('%s kicked a field goal for %d yards' % (player[0],player[1]))
+    print('%s kicked a successful field goal for %d yards' % (player[0],player[1]))
 print('=================================================================') 
 print()
-"""
+
+print('=================================================================')
+print('11. Longest field goal.')
+players = getMostMadeFieldGoals()
+for player in players:
+    print('%s has kicked %d successful field goals' % (player[0],player[1]))
+print('=================================================================') 
+print()
+
+print('=================================================================')
+print('12. Most missed field goals.')
+players = getMostMissedFieldGoals()
+for player in players:
+    print('%s has missed %d field goals' % (player[0],player[1]))
+print('=================================================================') 
+print()
+
+print('=================================================================')
+print('13. Most dropped passes')
+players = getPlayerMostDroppedPasses()
+for player in players:
+    print('%s has dropped %d passes' % (player[0],player[1]))
+print('=================================================================') 
+print()
+
+
