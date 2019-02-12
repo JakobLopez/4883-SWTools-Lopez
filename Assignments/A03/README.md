@@ -1,5 +1,3 @@
-
-
 <ul>Files
     <li>
     nfl_scrape.py -    
