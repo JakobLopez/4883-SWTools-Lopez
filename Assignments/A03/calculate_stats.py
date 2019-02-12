@@ -69,10 +69,13 @@ def writePlayerInfo():
                                                 players[playerid]['TeamInfo'][year].append(info['clubcode'])     
                                                 players[playerid]['RushYards'] = []
                                                 players[playerid]['PassYards'] = []
+                                                players[playerid]['FieldGoals'] = []
                                                 if info['statId'] == 10:
                                                     players[playerid]['RushYards'].append(info['yards'])
                                                 if info['statId'] == 15:
                                                     players[playerid]['PassYards'].append(info['yards'])
+                                                if info['statId'] == 70:
+                                                    players[playerid]['FieldGoals'].append(info['yards'])
                                             #If player already in dicitionary    
                                             else:   
                                                 #If player is playing for new team
@@ -88,6 +91,8 @@ def writePlayerInfo():
                                                     players[playerid]['RushYards'].append(info['yards'])
                                                 if info['statId'] == 15:
                                                     players[playerid]['PassYards'].append(info['yards'])
+                                                if info['statId'] == 70:
+                                                    players[playerid]['FieldGoals'].append(info['yards'])
 
      #Writes all game IDs
     g.write(json.dumps(players))
@@ -285,6 +290,7 @@ def getWinLossRatio(team):
     ratio = data[team]['wins']/data[team]['losses']
 
     return ratio
+
 def getPenalties(team):
     data = openFileJson('./team_info.json')
 
@@ -315,7 +321,21 @@ def getAvgNumPlays():
                             plays = plays + drivedata['numplays']
     
     return round(plays/count)
-                                
+
+def getLongestFieldGoal():
+    players = []
+    data = openFileJson('./player_info.json')
+    
+    furthest = 0
+    for player,playerdata in data.items():
+        for yard in playerdata['FieldGoals']:
+            if yard and yard >= furthest:
+                furthest = yard
+                tup = (playerdata['Name'],furthest)
+                players.append(tup)
+    players = list(filter(lambda x: x[1] == furthest, players))
+    return players
+    
 
 
 
@@ -323,7 +343,8 @@ def getAvgNumPlays():
 #Writes player info to JSON file
 #writePlayerInfo()
 #writeTeamInfo()
-getAvgNumPlays()
+
+
 """
 print('=================================================================')
 print('1. Find the player(s) that played for the most teams.')
@@ -399,9 +420,17 @@ print('=================================================================')
 print()
 
 print('=================================================================')
-print('8. Average number of plays in a game.')
+print('9. Average number of plays in a game.')
 avg = getAvgNumPlays()
 print('On average, there are %d plays in a game' % (avg))
+print('=================================================================') 
+print()
+
+print('=================================================================')
+print('10. Longest field goal.')
+players = getLongestFieldGoal()
+for player in players:
+    print('%s kicked a field goal for %d yards' % (player[0],player[1]))
 print('=================================================================') 
 print()
 """
