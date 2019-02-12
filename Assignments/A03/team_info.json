@@ -1,130 +1,194 @@
 {
     "PIT": {
         "penalties": 1040,
-        "penalty yards": 9494
+        "penalty yards": 9494,
+        "wins": 108,
+        "losses": 62
     },
     "TEN": {
         "penalties": 1036,
-        "penalty yards": 8949
+        "penalty yards": 8949,
+        "wins": 69,
+        "losses": 93
     },
     "ATL": {
         "penalties": 917,
-        "penalty yards": 8026
+        "penalty yards": 8026,
+        "wins": 95,
+        "losses": 74
     },
     "MIA": {
         "penalties": 978,
-        "penalty yards": 8409
+        "penalty yards": 8409,
+        "wins": 72,
+        "losses": 89
     },
     "BAL": {
         "penalties": 1159,
-        "penalty yards": 9935
+        "penalty yards": 9935,
+        "wins": 101,
+        "losses": 72
     },
     "KC": {
         "penalties": 1073,
-        "penalty yards": 8821
+        "penalty yards": 8821,
+        "wins": 90,
+        "losses": 78
     },
     "CAR": {
         "penalties": 987,
-        "penalty yards": 8491
+        "penalty yards": 8491,
+        "wins": 84,
+        "losses": 82
     },
     "PHI": {
         "penalties": 1133,
-        "penalty yards": 9521
+        "penalty yards": 9521,
+        "wins": 93,
+        "losses": 75
     },
     "CIN": {
         "penalties": 1062,
-        "penalty yards": 9047
+        "penalty yards": 9047,
+        "wins": 85,
+        "losses": 79
     },
     "DEN": {
         "penalties": 1156,
-        "penalty yards": 9818
+        "penalty yards": 9818,
+        "wins": 96,
+        "losses": 74
     },
     "CLE": {
         "penalties": 1021,
-        "penalty yards": 8699
+        "penalty yards": 8699,
+        "wins": 41,
+        "losses": 118
     },
     "MIN": {
         "penalties": 977,
-        "penalty yards": 8402
+        "penalty yards": 8402,
+        "wins": 85,
+        "losses": 79
     },
     "HOU": {
         "penalties": 1063,
-        "penalty yards": 9252
+        "penalty yards": 9252,
+        "wins": 84,
+        "losses": 84
     },
     "NYJ": {
         "penalties": 1047,
-        "penalty yards": 8803
+        "penalty yards": 8803,
+        "wins": 74,
+        "losses": 92
     },
     "IND": {
         "penalties": 976,
-        "penalty yards": 7996
+        "penalty yards": 7996,
+        "wins": 95,
+        "losses": 77
     },
     "JAX": {
         "penalties": 980,
-        "penalty yards": 8509
+        "penalty yards": 8509,
+        "wins": 54,
+        "losses": 109
     },
     "NO": {
         "penalties": 1063,
-        "penalty yards": 9566
+        "penalty yards": 9566,
+        "wins": 107,
+        "losses": 65
     },
     "DET": {
         "penalties": 1117,
-        "penalty yards": 9506
+        "penalty yards": 9506,
+        "wins": 71,
+        "losses": 92
     },
     "TB": {
         "penalties": 1128,
-        "penalty yards": 9321
+        "penalty yards": 9321,
+        "wins": 55,
+        "losses": 105
     },
     "DAL": {
         "penalties": 1124,
-        "penalty yards": 9040
+        "penalty yards": 9040,
+        "wins": 92,
+        "losses": 75
     },
     "ARI": {
         "penalties": 1051,
-        "penalty yards": 8587
+        "penalty yards": 8587,
+        "wins": 82,
+        "losses": 82
     },
     "SF": {
         "penalties": 1137,
-        "penalty yards": 9410
+        "penalty yards": 9410,
+        "wins": 80,
+        "losses": 87
     },
     "NYG": {
         "penalties": 966,
-        "penalty yards": 8342
+        "penalty yards": 8342,
+        "wins": 78,
+        "losses": 87
     },
     "WAS": {
         "penalties": 1032,
-        "penalty yards": 8682
+        "penalty yards": 8682,
+        "wins": 63,
+        "losses": 98
     },
     "SEA": {
         "penalties": 1286,
-        "penalty yards": 10867
+        "penalty yards": 10867,
+        "wins": 103,
+        "losses": 71
     },
     "LA": {
         "penalties": 1167,
-        "penalty yards": 9922
+        "penalty yards": 9922,
+        "wins": 67,
+        "losses": 96
     },
     "GB": {
         "penalties": 1040,
-        "penalty yards": 8876
+        "penalty yards": 8876,
+        "wins": 109,
+        "losses": 65
     },
     "CHI": {
         "penalties": 1036,
-        "penalty yards": 8748
+        "penalty yards": 8748,
+        "wins": 76,
+        "losses": 87
     },
     "NE": {
         "penalties": 1014,
-        "penalty yards": 8914
+        "penalty yards": 8914,
+        "wins": 139,
+        "losses": 44
     },
     "BUF": {
         "penalties": 1087,
-        "penalty yards": 9203
+        "penalty yards": 9203,
+        "wins": 67,
+        "losses": 94
     },
     "OAK": {
         "penalties": 1287,
-        "penalty yards": 10734
+        "penalty yards": 10734,
+        "wins": 61,
+        "losses": 100
     },
     "LAC": {
         "penalties": 1040,
-        "penalty yards": 8390
+        "penalty yards": 8390,
+        "wins": 87,
+        "losses": 78
     }
 }
