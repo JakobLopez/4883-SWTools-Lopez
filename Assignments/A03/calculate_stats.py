@@ -26,7 +26,6 @@ def writePlayerInfo():
     #Opens a file for writing
     g = open("player_info.json","w")
     
-    
     #Opens file containing file paths from game_data
     with open('files.txt') as f:
         #Read every file path
@@ -89,8 +88,7 @@ def writePlayerInfo():
                                                     players[playerid]['RushYards'].append(info['yards'])
                                                 if info['statId'] == 15:
                                                     players[playerid]['PassYards'].append(info['yards'])
-            if 'str' in line:
-                break
+
      #Writes all game IDs
     g.write(json.dumps(players))
 
@@ -121,19 +119,31 @@ def writeTeamInfo():
                     #Check for correct abbreviation  
                     home = abbr[home]                
                     away = abbr[away]
+
                     #If team not in dictionary, add them
                     if home not in teams:
                         teams[home] = {}
                         teams[home]['penalties'] = 0
                         teams[home]['penalty yards'] = 0
+                        teams[home]['wins'] = 0
+                        teams[home]['losses'] = 0
                     teams[home]['penalties'] = teams[home]['penalties'] + gamedata['home']['stats']['team']['pen']
                     teams[home]['penalty yards'] = teams[home]['penalty yards'] + gamedata['home']['stats']['team']['penyds']
                     if away not in teams:
                         teams[away] = {}
                         teams[away]['penalties'] = 0
                         teams[away]['penalty yards'] = 0
+                        teams[away]['wins'] = 0
+                        teams[away]['losses'] = 0
                     teams[away]['penalties'] = teams[away]['penalties'] + gamedata['away']['stats']['team']['pen']
                     teams[away]['penalty yards'] = teams[away]['penalty yards'] + gamedata['away']['stats']['team']['penyds']
+
+                    if gamedata['home']['score']['T'] > gamedata['away']['score']['T']:
+                        teams[home]['wins'] = teams[home]['wins'] + 1
+                        teams[away]['losses'] = teams[away]['losses'] + 1
+                    elif gamedata['home']['score']['T'] < gamedata['away']['score']['T']:
+                        teams[away]['wins'] = teams[away]['wins'] + 1
+                        teams[home]['losses'] = teams[home]['losses'] + 1
 
      #Writes all game IDs
     g.write(json.dumps(teams))
@@ -253,12 +263,68 @@ def getTeamMostPenaltyYards():
             team.append(tup)
     return team
 
-                
+def getHighestWinLossRatio():
+    teams = []
+
+    data = openFileJson('./team_info.json')
+
+    max_key = max(data, key= lambda x: data[x]['wins']/data[x]['losses'])
+    max_wlr = data[max_key]['wins'] / data[max_key]['losses']
+
+    for t,tdata in data.items():
+        ratio = tdata['wins']/tdata['losses']
+        if ratio == max_wlr:
+            tup = (t,ratio)
+            teams.append(tup)
+    
+    return teams
+
+def getWinLossRatio(team):
+    data = openFileJson('./team_info.json')
+
+    ratio = data[team]['wins']/data[team]['losses']
+
+    return ratio
+def getPenalties(team):
+    data = openFileJson('./team_info.json')
+
+    pens = data[team]['penalties']
+    return pens
+
+def getAvgNumPlays():
+    count = 0
+    plays = 0
+    #Opens file containing file paths from game_data
+    with open('files.txt') as f:
+        #Read every file path
+        for line in f:
+            #Truncates empty character at end of line
+            line = line[:27]
+
+            #Gets file data
+            data = openFileJson(line)
+
+            count = count + 1
+
+            # pull out the game id and game data
+            for gameid,gamedata in data.items():
+                if gameid != 'nextupdate':
+                    # go straight for the drives
+                    for driveid,drivedata in gamedata['drives'].items():
+                        if driveid != 'crntdrv':
+                            plays = plays + drivedata['numplays']
+    
+    return round(plays/count)
+                                
+
+
+
+              
 #Writes player info to JSON file
 #writePlayerInfo()
 #writeTeamInfo()
-
-
+getAvgNumPlays()
+"""
 print('=================================================================')
 print('1. Find the player(s) that played for the most teams.')
 player_max_team,num_teams = getPlayersWithMostTeams()
@@ -317,3 +383,25 @@ for team in teams:
     print('%s has a total of %d penalty yards' % (team[0], team[1]))
 print('=================================================================') 
 print()
+
+
+print('=================================================================')
+print('8. Find the correlation between most penalized teams and games won / lost.')
+teams = getTeamMostPenalties()
+for team in teams:
+    ratio = getWinLossRatio(team[0])
+    print('%s has the most penalties(%d) and a win/loss ratio of %f' % (team[0], team[1], ratio))
+teams = getHighestWinLossRatio()
+for team in teams:
+    pens = getPenalties(team[0])
+    print('%s has the best win/loss ratio(%f) and %d penalties' % (team[0], team[1], pens))
+print('=================================================================') 
+print()
+
+print('=================================================================')
+print('8. Average number of plays in a game.')
+avg = getAvgNumPlays()
+print('On average, there are %d plays in a game' % (avg))
+print('=================================================================') 
+print()
+"""
