@@ -49,3 +49,6 @@ Contains information for every team.
 
 ### results.txt
 Stats found
+
+### team_abbrev.json
+Contains corrected team abbreviations
