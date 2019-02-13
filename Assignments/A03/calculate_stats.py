@@ -1,3 +1,22 @@
+"""
+Course: cmps 4883
+Assignemt: A03
+Date: 2/13/19
+Github username: JakobLopez
+Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
+Name: Jakob Lopez
+Description: 
+    If you do NOT  files.txt, RUN process_files.py.
+    This program reads from a file called files.txt, which
+    contains the file path to every game's data (./game_data/some_gameid.json).
+    It creates 2 data structures: player_info.json and team_info.json.
+    If you do not already have files, then uncomment the function calls
+    writePlayerInfo and writeTeamInfo. These functions create the data structures,
+    which makes the execution of the program faster when looking for stats.
+    Functions read from these data structures to determine stats such as: finding
+    the player who played for the most teams, who kicked longest field goal, etc...
+    The output is written to screen and was saved to file from command line.
+"""
 import json
 import os,sys
 import pprint as pp
