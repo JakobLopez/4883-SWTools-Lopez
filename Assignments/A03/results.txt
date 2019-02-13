@@ -1,0 +1,70 @@
+Name: Jakob Lopez
+Assignment: A03 - Nfl Stats 
+Date: February 12, 2019
+
+=================================================================
+1. Find the player(s) that played for the most teams.
+S.Graham played for 8 teams
+=================================================================
+
+=================================================================
+2. Find the player(s) that played for the most teams in a year.
+S.Andrus played for 3 teams in 2009
+=================================================================
+
+=================================================================
+3. Find the player(s) that had the most yards rushed for a loss.
+M.Turk had a rush of  -27 yards
+=================================================================
+
+=================================================================
+4. Find the player(s) that had the most rushes for a loss.
+L.McCoy has rushed for negative yards 333 times
+=================================================================
+
+=================================================================
+5. Find the player(s) that had the most rushes for a loss.
+D.Brees has passed for negative yards 132 times
+=================================================================
+
+=================================================================
+6. Find the team with the most penalties.
+OAK has a total of 1287 penalties
+=================================================================
+
+=================================================================
+7. Find the team with the most yards in penalties.
+SEA has a total of 10867 penalty yards
+=================================================================
+
+=================================================================
+8. Find the correlation between most penalized teams and games won / lost.
+OAK has the most penalties(1287) and a win/loss ratio of 0.610000
+NE has the best win/loss ratio(3.159091) and 1014 penalties
+=================================================================
+
+=================================================================
+9. Average number of plays in a game.
+On average, there are 177 plays in a game
+=================================================================
+
+=================================================================
+10. Longest field goal.
+M.Prater kicked a successful field goal for 64 yards
+=================================================================
+
+=================================================================
+11. Longest field goal.
+S.Gostkowski has kicked 320 successful field goals
+=================================================================
+
+=================================================================
+12. Most missed field goals.
+M.Crosby has missed 55 field goals
+=================================================================
+
+=================================================================
+13. Most dropped passes
+St.Johnson has dropped 4 passes
+=================================================================
+
