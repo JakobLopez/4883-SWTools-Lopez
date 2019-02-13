@@ -16,6 +16,7 @@ Description:
     Functions read from these data structures to determine stats such as: finding
     the player who played for the most teams, who kicked longest field goal, etc...
     The output is written to screen and was saved to file from command line.
+    NOTE: ALL STATS ARE FROM 2009 - 2018 
 """
 import json
 import os,sys
