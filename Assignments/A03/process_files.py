@@ -1,3 +1,19 @@
+"""
+Course: cmps 4883
+Assignemt: A03
+Date: 2/13/19
+Github username: JakobLopez
+Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
+Name: Jakob Lopez
+Description: 
+    Run nfl_scrape.py before running executing.
+    This program ASSUMES gameid.json data is stored in a folder called
+    game_data. This program is ran before calculate_stats.py because it
+    builds a dictionary of paths to game data and writes it to files.txt,
+    which calculate_stats.py uses to build its data structures. The function
+    openFileJson is imported into calculate_stats.py to open up a valid
+    json file, which is how the game data is stored.
+"""
 import json
 import os,sys
 
