@@ -1,3 +1,6 @@
+## .vscode
+  - contains sftp.json
+    - has credentials to connect to database
 ## team_games.php
   - This is the main program
   - It queries data from cs2 database
@@ -13,3 +16,8 @@
     - top 5 players with shortest avg field goal length
     - rank NFL by win:loss ratio 
     - top 5 most common NFL last names
+## query_function.php
+  - Helper function for team_games.php
+  - Runs an sql query and returns data in associative array
+### How to View Code
+http://cs2.mwsu.edu/~jlopez/software_tools/team_games.php
