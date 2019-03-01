@@ -1,5 +1,5 @@
 ## Required
-```team_games.php``` ASSUMES you have a file called ```credentials.php``` containing username and password for the data base as: $USERNAME, $PASSWORD
+```team_games.php``` ASSUMES you have a file called ```credentials.php``` containing username and password for the database as: $USERNAME, $PASSWORD
 ## How to View Code
 http://cs2.mwsu.edu/~jlopez/software_tools/team_games.php
 ## .vscode
