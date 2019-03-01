@@ -1,3 +1,7 @@
+## Required
+team_games.php ASSUMES you have a file called credentials.php containing username and password for the data base as: $USERNAME, $PASSWORD
+## How to View Code
+http://cs2.mwsu.edu/~jlopez/software_tools/team_games.php
 ## .vscode
   - contains sftp.json
     - has credentials to connect to database
@@ -19,5 +23,3 @@
 ## query_function.php
   - Helper function for team_games.php
   - Runs an sql query and returns data in associative array
-### How to View Code
-http://cs2.mwsu.edu/~jlopez/software_tools/team_games.php
