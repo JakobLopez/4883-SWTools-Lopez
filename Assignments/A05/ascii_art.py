@@ -112,10 +112,11 @@ Params:
     w - width
     h - height
     font - font that the ascii characters will be written in
+    size - size of font
 Returns:
     newImg - the drawn ascii image
 """
-def ascii_img_to_color(orig, ascii_im, w, h,font):
+def ascii_img_to_color(orig, ascii_im, w, h,font, size):
     #Open a new image using 'RGBA' (a colored image with alpha channel for transparency)
     #              color_type      (w,h)     (r,g,b,a) 
     #                   \           /            /
@@ -123,7 +124,7 @@ def ascii_img_to_color(orig, ascii_im, w, h,font):
     newImg = Image.new('RGBA', (w*5,h*5), (255,255,255,255))
     
     #Open a TTF file and specify the font size
-    fnt = ImageFont.truetype(font, 12)
+    fnt = ImageFont.truetype(font, size)
 
     #Get a drawing context for your new image
     drawOnMe = ImageDraw.Draw(newImg)
@@ -156,18 +157,23 @@ def ascii_img_to_color(orig, ascii_im, w, h,font):
 
 
 if __name__=='__main__':
-    #Image 
-    path = 'sp.jpg'
-    #Convert image to ascii
-    orig, ascii_im, w, h = img_to_ascii(path=path,width=150)
+    #Path to image (./input_images/picture.jpg) 
+    input_path = sys.argv[1]
+    #Path to output (./output_images/output.png)
+    output_path = sys.argv[2]
+    #Path to font type (./path_to_file/fonttype.ttf)
+    font_type = sys.argv[3]
+    #Size of font
+    font_size = sys.argv[4]
 
-    #Downloaded font
-    font_type = 'Aliencons TFB.ttf'
+    #Convert image to ascii
+    orig, ascii_im, w, h = img_to_ascii(path=input_path,width=150)
+
     #Redrawn ascii image
-    img = ascii_img_to_color(orig,ascii_im,w,h, font_type)
+    img = ascii_img_to_color(orig,ascii_im,w,h, font_type, int(font_size))
 
     #Display your new image 
     img.show()
 
     #Save the image
-    img.save('output.png')
+    img.save(output_path)
