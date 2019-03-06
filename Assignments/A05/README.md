@@ -1,4 +1,4 @@
-##How to Run Code
+## How to Run Code
   - Command line arguments are in the form: ```python ascii_art.py path_to_image path_to_output path_to_font font_size```
   - EX:<br>
   ```python ascii_art.py './input_images/vans-logo.png' './output_images/vans_output.png' './Aliencons TFB.ttf' 12 ```
