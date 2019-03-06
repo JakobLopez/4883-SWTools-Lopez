@@ -147,6 +147,7 @@ def ascii_img_to_color(orig, ascii_im, w, h,font):
             #            \         /        /            /
             #             \       /        /            /
             drawOnMe.text(((x*5)-1,(y*5)-1), c, font=fnt, fill=color)
+            #Uncomment to overlap characters and output better image
             """drawOnMe.text(((x*5)-1,(y*5)+1), c, font=fnt, fill=color)
             drawOnMe.text(((x*5)+1,(y*5)-1), c, font=fnt, fill=color)
             drawOnMe.text(((x*5)+1,(y*5)+1), c, font=fnt, fill=color)"""
