@@ -1,6 +1,6 @@
 """
 Course: cmps 4883
-Assignemt: A03
+Assignemt: A06
 Date: 3/09/2019
 Github username: JakobLopez
 Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
