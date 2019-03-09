@@ -1,3 +1,14 @@
+"""
+Course: cmps 4883
+Assignemt: A03
+Date: 3/09/2019
+Github username: JakobLopez
+Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
+Name: Jakob Lopez
+Description: 
+    This program uses BeautifulScraper to scrape emojis from a 
+    website. All 877 emojis are stored in a folder named 'emojis.'
+"""
 from beautifulscraper import BeautifulScraper
 import urllib
 import os, os.path
