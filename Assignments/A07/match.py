@@ -1,8 +1,9 @@
-from skimage.measure import structural_similarity as ssim
+from skimage.measure import compare_ssim as ssim
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
-
+import sys
+import os
 
 def mse(imageA, imageB):
 	# the 'Mean Squared Error' between the two images is the
@@ -15,56 +16,82 @@ def mse(imageA, imageB):
 	# the two images are
 	return err
 
-def compare_images(imageA, imageB, title):
-	# compute the mean squared error and structural similarity
-	# index for the images
-	m = mse(imageA, imageB)
-	s = ssim(imageA, imageB)
+def get_arguments():
+	# This assumes arguments are like: key1=val1 key2=val2 (with NO spaces between key equal val!)
+	args = {}
 
-	# setup the figure
-	fig = plt.figure(title)
-	plt.suptitle("MSE: %.2f, SSIM: %.2f" % (m, s))
+	for arg in sys.argv[1:]:
+		k,v = arg.split('=')
+		args[k] = v
+	return args
 
-	# show first image
-	ax = fig.add_subplot(1, 2, 1)
-	plt.imshow(imageA, cmap = plt.cm.gray)
-	plt.axis("off")
+#Dictionary of arguments
+args = get_arguments()
 
-	# show the second image
-	ax = fig.add_subplot(1, 2, 2)
-	plt.imshow(imageB, cmap = plt.cm.gray)
-	plt.axis("off")
+#Exit program if not enough arugments
+if(len(args) < 2):
+	print("Not enough arguments. Expected folder and image.")
+	exit(1)
 
-	# show the images
-	plt.show()
-
-# load the images -- the original, the original + contrast,
-# and the original + photoshop
-original = cv2.imread("jp_gates_original.png")
-contrast = cv2.imread("jp_gates_contrast.png")
-shopped = cv2.imread("jp_gates_photoshopped.png")
- 
-# convert the images to grayscale
+#Original image from arguments
+original = cv2.imread(args['image'])
+#Grayscale
 original = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
-contrast = cv2.cvtColor(contrast, cv2.COLOR_BGR2GRAY)
-shopped = cv2.cvtColor(shopped, cv2.COLOR_BGR2GRAY)
+
+comparisons = {}
+
+#Loop through directory
+for dirname, dirnames, filenames in os.walk(args['folder']):
+	#Loop through every file
+	for filename in filenames:
+		#Get path name and replace \ with /
+		path = os.path.join(dirname, filename).replace("\\","/")
+		
+		#Image in file
+		comparison = cv2.imread(path)
+		#Grayscale
+		comparison = cv2.cvtColor(comparison, cv2.COLOR_BGR2GRAY)
+		
+		#Get mse of original and current image
+		m = mse(original,comparison)
+		#Get ssim of original and current image 
+		s = ssim(original,comparison)
+
+		#Add results to dictionary
+		comparisons[path] = {}
+		comparisons[path]['image'] = comparison
+		comparisons[path]['path'] = path
+		comparisons[path]['mse'] = m
+		comparisons[path]['ssim'] = s
+#Get path to images closest to original according to mse and ssim
+lowest_mse = min(comparisons, key=lambda x:comparisons[x]['mse'])
+highest_ssim = max(comparisons, key=lambda x:comparisons[x]['ssim'])
+
+#Closest images to original
+mse_image = comparisons[lowest_mse]['image']
+ssim_image = comparisons[highest_ssim]['image']
 
 # initialize the figure
 fig = plt.figure("Images")
-images = ("Original", original), ("Contrast", contrast), ("Photoshopped", shopped)
- 
-# loop over the images
-for (i, (name, image)) in enumerate(images):
-	# show the image
-	ax = fig.add_subplot(1, 3, i + 1)
-	ax.set_title(name)
-	plt.imshow(image, cmap = plt.cm.gray)
-	plt.axis("off")
+plt.suptitle("Closest Images")
+
+# show the image
+ax = fig.add_subplot(131)
+ax.set_title("Original")
+plt.imshow(original, cmap = plt.cm.gray)
+plt.axis("off")
+
+# show the image
+ax = fig.add_subplot(132)
+ax.set_title("Lowest MSE: %.2f" % comparisons[lowest_mse]['mse'])
+plt.imshow(mse_image, cmap = plt.cm.gray)
+plt.axis("off")
+
+# show the image
+ax = fig.add_subplot(133)
+ax.set_title("Highest ssim: %.2f" % comparisons[highest_ssim]['ssim'])
+plt.imshow(ssim_image, cmap = plt.cm.gray)
+plt.axis("off")
  
 # show the figure
 plt.show()
- 
-# compare the images
-compare_images(original, original, "Original vs. Original")
-compare_images(original, contrast, "Original vs. Contrast")
-compare_images(original, shopped, "Original vs. Photoshopped")
