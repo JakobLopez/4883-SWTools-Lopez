@@ -1,6 +1,6 @@
 import cv2
 from PIL import Image, ImageDraw
-
+import image_slicer
 
 
 def thick_line(img,coords,fill,thickness=1,xy='x'):
@@ -20,11 +20,25 @@ def thick_line(img,coords,fill,thickness=1,xy='x'):
 
 
 if __name__=='__main__':
+    #Path to picture
+    path = 'vans-logo.png'
 
-    path = "superp.png"
-    #path = 'vans-logo.png'
-    #ath = "/Users/griffin/Dropbox/Scripts-random/image_projects/AsciiArt/original_images/Apple_Rainbow.png"
+    #Split picture into slices
+    #                  picture      # of slices     Don't automatic save
+    #                         \        /            /
+    #                          \      /            /                       
+    tiles = image_slicer.slice(path, 4, save=False)
+    
+    #Output folder
+    output = 'sliced_images/'
 
+    #Saves split image chunks to folder
+    #                    image slices     folder
+    #                         \             /
+    image_slicer.save_tiles(tiles, prefix=output)
+
+
+    """
     image_name,ext = path.split('.')
 
     im = Image.open(path)
@@ -63,4 +77,5 @@ if __name__=='__main__':
     out_name = image_name+'_'+str(size)+'.'+ext
     print(out_name)
     im.save(out_name, "PNG")
+    """
    
