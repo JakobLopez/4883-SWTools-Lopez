@@ -1,3 +1,29 @@
+"""
+Course: cmps 4883
+Assignemt: A0
+Date: 4/01/19
+Github username: JakobLopez
+Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
+Name: Jakob Lopez
+Description: 
+    Command Line Arguments:
+        input_file - path to image
+        input_folder - path to folder of subimages
+        size - size of subimages when in mosaic. Affects new image size.
+        output_folder - path to where image will be saved
+        resize - decimal number representing size of input_file. Can speed up 
+                 execution on big images.
+                 e.g. 1 = image size is same; .5 = image size is half
+    This program replaces each pixel in an image with a subimage that is 
+    of similar color. Each subimage is preprocessed to find its 3 dominant colors.
+    The preprocessed data is put into a JSON file. For every pixel in the 
+    original image, the preprocessed data is iterated to find the subimage with a 
+    dominant color that is closest to the color of the pixel. On a new background,
+    the closest subimage is pasted in place of its respective pixel. The alpha channel
+    of a subimage is masked and the image is placed on a background that is the same color
+    as the evaluated pixel to make the image look better. Image is saved as .png in given 
+    output_folder.
+"""
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from dominant_color import get_dominant_colors
@@ -51,7 +77,17 @@ def process_folder_images(path_to_folder):
 
 
 def get_color_distance(pixel_color, subimage_color):
-    #A result less than 2 is generally considered to be perceptually equivalent.
+    """
+    Gets the distance between 2 colors.
+    A result less than 2 is generally considered to be perceptually equivalent.
+    Params:
+        pixel_color - rgb of pixel 
+        subimage_color - rgb of dominant color in subimage
+    Returns:
+        the difference between the 2 colors
+    Requires:
+        colormath
+    """
     
     color1_rgb = sRGBColor(pixel_color[0],pixel_color[1],pixel_color[2])
 
@@ -100,6 +136,7 @@ if __name__=='__main__':
     folder = args['input_folder']
     size = int(args['size'])
     output = args['output_folder']
+    size_change = float(args['resize'])
 
     #process_folder_images(folder)
 
@@ -111,10 +148,9 @@ if __name__=='__main__':
 
     #Get dimensions
     width, height = im.size
-    if width > 1000:
-        im = resize(im,width//8)
-        width, height = im.size
-    print(im.size)
+    im = resize(im,int(width * size_change) )
+    width, height = im.size
+ 
 
     #Open json with player info
     data = openFileJson('./color_data.json')
