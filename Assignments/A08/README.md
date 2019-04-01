@@ -3,7 +3,7 @@
 ## How To Run
   - Command line ex. 
     - ```python mosaic.py input_file='./input_images/sp.jpg' input_folder='./emojis' size=24 output_folder='./output_images' resize=1```
-  - If using emojis as subimages, downloading color_data.json will speed up execution
+  - If using emojis as subimages, color_data.json already has emoji image data and will speed up execution
   - If not using emojis as subimages, uncomment 
   
 ## mosaic.py
