@@ -6,7 +6,7 @@ Github username: JakobLopez
 Repo url: https://github.com/JakobLopez/4883-SWTools-Lopez
 Name: Jakob Lopez
 Description: 
-    
+    Opens a JSON file
 """
 import json
 import os,sys
