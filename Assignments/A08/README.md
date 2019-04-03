@@ -4,7 +4,7 @@
   - Command line ex. 
     - ```python mosaic.py input_file='./input_images/sp.jpg' input_folder='./emojis' size=24 output_folder='./output_images' resize=1```
   - If using emojis as subimages, color_data.json already has emoji image data and will speed up execution
-  - If not using emojis as subimages, uncomment 
+  - If not using emojis as subimages, uncomment line 141
   
 ## mosaic.py
   - Gets arguments from command line
