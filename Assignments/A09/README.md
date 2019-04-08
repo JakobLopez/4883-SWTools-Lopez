@@ -11,3 +11,5 @@
   - Have user choose how information is copied (concatenated or put into array)
   - Allow user to select which copied item to paste
   - Saves a history of copies made to the clipboard
+## References
+  - Ranges: https://www.quirksmode.org/dom/range_intro.html
