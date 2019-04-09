@@ -5,7 +5,7 @@
       "description": "Allows for multiple, non-contiguous lines to be copied and saved",
       "permissions": ["activeTab"],
       "background": {
-          "scripts": ["background.js"],
+        "scripts": ["background.js"],
           "persistent": false
       },
       "content_scripts": [

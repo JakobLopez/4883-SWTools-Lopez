@@ -1,13 +1,17 @@
-/*
-//Executes script when icon is clicked
-chrome.browserAction.onClicked.addListener(function (tabId, tab) {
-            chrome.tabs.executeScript({
-                    file: "clipboard.js"
-                }, _ => {
-                    //Catches error
-                    let e = chrome.runtime.lastError;
-                    if (e !== undefined) {
-                        alert("Clipboard cannot be used on this page.");
-                    }
-                }
-            )});*/
+chrome.browserAction.onClicked.addListener(function (tab) {
+    chrome.tabs.sendMessage(tab.id, {
+        method: "getTextSelection"
+    }, function (response) {
+
+        var url = response.url;
+        var subject = response.subject;
+        var body = response.body;
+        alert(url + '\n' + subject + '\n' + body);
+
+        if (body == '') {
+            body = "No text selected";
+            //You may choose to pop up a text box allowing the user to enter in a message instead.
+        }
+ 
+    });
+});
