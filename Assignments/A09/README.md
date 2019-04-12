@@ -22,6 +22,7 @@
   - Selected text will remain highlighted
   - Need a way to remove unwanted selections
   - Copy multiple items
+  - Highlights get removed after copy
   - Have user choose how information is copied (concatenated or put into array)
   - Allow user to select which copied item to paste
   - Saves a history of copies made to the clipboard
