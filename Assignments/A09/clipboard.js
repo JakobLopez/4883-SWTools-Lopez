@@ -151,26 +151,21 @@ function makeEditableAndHighlight(colour) {
  * Listens for a request from the button in the browser.
  * When it sees the getTextSelection request, it returns the selection HTML, as well as the URL and title of the tab.
  */
-chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.method == "getTextSelection") {
         var selection = getTextSelection();
 
-        var text = await getClipboardText();
-        alert(text);
-
-        writeToClipboard(text + selection);
-
-
-
-
-        sendResponse({
-            body: selection,
-            url: window.location.href,
-            subject: document.title
+        getClipboardText().then(text => {
+            writeToClipboard(text + selection);
+            sendResponse({
+                body: selection,
+                url: window.location.href,
+                subject: document.title
+            });
         });
+        
     } else
         sendResponse({}); // snub them.
 
     return true;
-
 });
