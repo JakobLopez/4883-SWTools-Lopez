@@ -1,6 +1,4 @@
-//var prev = document.createElement('input');
 function getTextSelection() {
-
 
     //W3C or Mozilla Range Object
     //Supported on Chrome, Edge, Safari, IE 9 +
@@ -10,6 +8,7 @@ function getTextSelection() {
         //Get selection from window
         var selectionObj = window.getSelection();
         var sel = selectionObj.toString();
+        /*
 
         //If browser supports getRangeAt
         if (selectionObj.getRangeAt)
@@ -28,103 +27,67 @@ function getTextSelection() {
         //Get text from selected range
         var text = range.cloneContents();
         var div = document.createElement('div');
-        div.appendChild(text);
-        /*
-        //prev.innerText = prev.innerText + " " + selectionObj.toString();
-        //selectionObj.deleteFromDocument();
-        var input = document.createElement('input');
-        
-        navigator.clipboard.readText()
-            .then(text => {
-                
-                var word = text + sel;
-                input.innerText = word;
-      
-                alert(input.innerText)
-                input.select();
-
-                document.execCommand("copy");
-
-            })
-            .catch(err => {
-                word = 'Failed to read clipboard contents: ' + err;
-            });
-*/
-
-        //Read contents already in clipboard
-        //let cliptext = await navigator.clipboard.readText();
-        //var newContent = cliptext + sel;
-        //alert(cliptext)
-        //var copiedText = document.createTextNode(cliptext);
-
-        //Append the selected text to the new text
-        //div.appendChild(copiedText)
-        //div.appendChild(text);
-
-        /*navigator.clipboard.writeText(newContent).then( () =>{
-            alert("success");
-        },function(e){
-            alert("something went wrong");
-        });*/
-
-
-        /*
-        .then(clipboardText => {
-            //Create text from clipboard as node
-            var copiedText = document.createTextNode(clipboardText);
-
-            //Append the selected text to the new text
-            div.appendChild(copiedText)
-            div.appendChild(text);
-
-            var newContent = new String(div.innerHTML);
-            alert(typeof(newContent));
-
-            //Write all copied/selected text to clipboard
-            navigator.clipboard.writeText(newContent).then(function () {
-                alert('Async: Copying to clipboard was successful!');
-            }, function (err) {
-                alert('Async: Could not copy text: ', err);
-            });
-
-        });*/
+        div.appendChild(text);*/
 
         /*
         if (!document.execCommand("copy", false)) {
             makeEditableAndHighlight('yellow');
         }*/
 
-        return div.innerText;
+        return sel;
     }
-
     //For browsers that use Microsoft Text Range Objects
     else if (document.selection) {
-        sel = document.selection.createRange();
+        var sel = document.selection.createRange();
+
         var selectedText = userSelection;
+
         if (userSelection.text)
             selectedText = userSelection.text;
+        return selectedText;
         //range.execCommand("BackColor", false, 'yellow');
     }
 
 }
 
+/**
+ * Gets text currently in clipboard
+ * @param none
+ * @returns text in clipboard
+ */
 async function getClipboardText() {
-    var readResult = await navigator.permissions.query({
-        name: "clipboard-read"
-    })
+    try {
+        //Gets read permission
+        var readResult = await navigator.permissions.query({
+            name: "clipboard-read"
+        });
 
-    if (readResult.state == "granted" || readResult.state == "prompt")
-        return await navigator.clipboard.readText();
-
-
+        //If permission allowed
+        if (readResult.state == "granted" || readResult.state == "prompt")
+            //Return text in clipboard
+            return await navigator.clipboard.readText();
+    } catch (e) {
+        alert('An error occured reading from the clipboard');
+    }
 }
 
-function writeToClipboard(newClip) {
-    navigator.clipboard.writeText(newClip).then(function () {
-        alert("good");
-    }, function () {
-        alert("bad");
-    });
+/**
+ * Writes text to clipboard
+ * @param newClip the text to be written to clipboard
+ * @returns nothing
+ */
+async function writeToClipboard(newClip) {
+    try {
+        //Gets write permission
+        var writeResult = await navigator.permissions.query({
+            name: "clipboard-write"
+        });
+
+        if (writeResult.state == "granted" || writeResult.state == "prompt")
+            await navigator.clipboard.writeText(newClip);
+    } catch (e) {
+        alert('An error occured writing to the clipboard.');
+    }
 }
 
 function makeEditableAndHighlight(colour) {
@@ -146,26 +109,35 @@ function makeEditableAndHighlight(colour) {
 
 
 
-//document.addEventListener('mousedown', getTextSelection);
+document.addEventListener('mousedown', getTextSelection);
 /**
  * Listens for a request from the button in the browser.
  * When it sees the getTextSelection request, it returns the selection HTML, as well as the URL and title of the tab.
  */
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+
+    //If message from background.js is getTextSelection
     if (request.method == "getTextSelection") {
+        //Get content from selection
         var selection = getTextSelection();
 
+        //Get text already in the clipboard
         getClipboardText().then(text => {
+            //Append currently selected text to what is already in clipboard
             writeToClipboard(text + selection);
+
+            //Send response back to background.ts
             sendResponse({
                 body: selection,
                 url: window.location.href,
                 subject: document.title
             });
         });
-        
+
     } else
+        //Send back a blank message to background.ts
         sendResponse({}); // snub them.
 
+    //Makes listener asynchronous
     return true;
 });
