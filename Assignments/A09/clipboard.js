@@ -1,41 +1,78 @@
+var selections = [];
+
+/**
+ * Highlights a range of text
+ * @param none
+ * @returns nothing
+ */
 function hightlightTextSelection() {
 
     //W3C or Mozilla Range Object
     //Supported on Chrome, Edge, Safari, IE 9 +
     //Table to supported browsers : https://developer.mozilla.org/en-US/docs/Web/API/Range
     if (window.getSelection) {
+        //Get selection from document
         var range, sel = window.getSelection();
-        if (sel.rangeCount && sel.getRangeAt) {
-            range = sel.getRangeAt(0);
+
+        //If there is a selection, not just a mouse click
+        if (sel.toString() != '') {
+            selections.push(sel);
+            console.log(selections)
+
+            //If range is supported by browser
+            if (sel.rangeCount && sel.getRangeAt)
+                //Get range of selection starting from index 0
+                range = sel.getRangeAt(0);
+
+            //Allow edits to document
+            document.designMode = "on";
+
+            if (range) {
+                //Remove current range from document
+                sel.removeAllRanges();
+
+                //Add range from selection
+                sel.addRange(range);
+            }
+
+            // Use HiliteColor since some browsers apply BackColor to the whole block
+            if (!document.execCommand("HiliteColor", false, '#3390ff'))
+                document.execCommand("BackColor", false, '#3390ff');
+
+            //Change text color to white
+            document.execCommand('foreColor', false, 'white');
+            
+            //Remove window selection so there is no color clash
+            window.getSelection().removeAllRanges();
+
+            //Don't allow edits to document
+            document.designMode = "off";
         }
-
-        document.designMode = "on";
-
-        if (range) {
-            sel.removeAllRanges();
-            sel.addRange(range);
-        }
-
-        // Use HiliteColor since some browsers apply BackColor to the whole block
-        if (!document.execCommand("HiliteColor", false, '#3297FD')) {
-            document.execCommand("BackColor", false, '#3297FD');
-        }
-
-        //Change text color to white
-        document.execCommand('foreColor', false, 'white');
-
-        document.designMode = "off";
     }
-
 }
 
+/**
+ * Loops through document gets content of all selected items
+ * @param none
+ * @returns content of selected items
+ */
 function getTextSelection() {
+    //List of all font tags
     var fontList = document.getElementsByTagName('font');
+
+    //Initialize content to nothing
     var fontContent = "";
+
+    //For every font tag
     for (let font of fontList) {
+        //If color attribute is #ffffff
         if (font.getAttribute('color') == '#ffffff')
+            //Add to content
             fontContent = fontContent + font.innerText + " ";
     }
+
+    //Get current selection from document selection and convert to string
+    //var sel = window.getSelection().toString();
     return fontContent;
 }
 
@@ -58,8 +95,7 @@ async function writeToClipboard(newClip) {
     }
 }
 
-
-document.addEventListener('mousedown', hightlightTextSelection);
+document.addEventListener('mouseup', hightlightTextSelection);
 
 /**
  * Listens for a request from the button in the browser.
