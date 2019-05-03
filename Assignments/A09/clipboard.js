@@ -34,14 +34,15 @@ function hightlightTextSelection() {
                 //Add range from selection
                 sel.addRange(range);
             }
+            
 
             // Use HiliteColor since some browsers apply BackColor to the whole block
             if (!document.execCommand("HiliteColor", false, '#3390ff'))
                 document.execCommand("BackColor", false, '#3390ff');
 
             //Change text color to white
-            document.execCommand('foreColor', false, 'white');
-            
+            //document.execCommand('foreColor', false, 'white');
+     
             //Remove window selection so there is no color clash
             window.getSelection().removeAllRanges();
 
@@ -71,8 +72,6 @@ function getTextSelection() {
             fontContent = fontContent + font.innerText + " ";
     }
 
-    //Get current selection from document selection and convert to string
-    //var sel = window.getSelection().toString();
     return fontContent;
 }
 
@@ -108,7 +107,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         //Get content from selection
         var selection = getTextSelection();
 
-
         //Append currently selected text to what is already in clipboard
         writeToClipboard(selection).then(() => {
             //Send response back to background.ts
@@ -118,10 +116,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 subject: document.title
             });
         });
-
-
-
-
     } else
         //Send back a blank message to background.ts
         sendResponse({}); // snub them.
