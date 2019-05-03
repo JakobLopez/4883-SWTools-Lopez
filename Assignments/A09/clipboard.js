@@ -34,9 +34,8 @@ function hightlightTextSelection() {
                 //Add range from selection
                 sel.addRange(range);
             }
-            
 
-            // Use HiliteColor since some browsers apply BackColor to the whole block
+            //If browser supports HiliteColor
             if (!document.execCommand("HiliteColor", false, '#3390ff'))
                 document.execCommand("BackColor", false, '#3390ff');
 
@@ -59,7 +58,7 @@ function hightlightTextSelection() {
  */
 function getTextSelection() {
     //List of all font tags
-    var fontList = document.getElementsByTagName('font');
+    var fontList = document.getElementsByTagName('span');
 
     //Initialize content to nothing
     var fontContent = "";
@@ -67,7 +66,7 @@ function getTextSelection() {
     //For every font tag
     for (let font of fontList) {
         //If color attribute is #ffffff
-        if (font.getAttribute('color') == '#ffffff')
+        if (font.getAttribute('style') == 'background-color: rgb(51, 144, 255);')
             //Add to content
             fontContent = fontContent + font.innerText + " ";
     }
