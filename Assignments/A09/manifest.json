@@ -5,23 +5,30 @@
       "description": "Allows for multiple, non-contiguous lines to be copied and saved",
       "permissions": ["activeTab", "clipboardWrite", "clipboardRead"],
       "background": {
-        "scripts": ["background.js"],
+          "scripts": ["background.js"],
           "persistent": false
       },
-      "content_scripts": [
-          {
-              "matches": ["<all_urls>"],
-              "js": ["clipboard.js"],
-              "css": ["clipboard.css"]
-          }
-      ],
+      "content_scripts": [{
+          "matches": ["<all_urls>"],
+          "js": ["clipboard.js"],
+          "css": ["clipboard.css"]
+      }],
       "browser_action": {
-
+          "default_popup": "popup.html",
           "default_icon": {
               "16": "images/get_started16.png",
               "32": "images/get_started32.png",
               "48": "images/get_started48.png",
               "128": "images/get_started128.png"
+          }
+      },
+      "commands": {
+          "copy-selected-text": {
+              "suggested_key": {
+                  "default": "Ctrl+Shift+5"
+              },
+              "description": "Copies the selected text.",
+              "global":true
           }
       },
       "icons": {
