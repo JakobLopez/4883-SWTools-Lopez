@@ -41,10 +41,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     alert(url + '\n' + subject + '\n' + body);
                 });
         });
-    } else
-        //Send back a blank message to background.ts
-        sendResponse({}); // snub them.
-
+    } 
 });
 
 //Listen for a keyboard shortcut
