@@ -16,8 +16,7 @@ function hightlightTextSelection() {
 
         //If there is a selection, not just a mouse click
         if (sel.toString() != '') {
-            selections.push(sel);
-            console.log(selections)
+            selections.push(sel.toString());
 
             //If range is supported by browser
             if (sel.rangeCount && sel.getRangeAt)
@@ -41,7 +40,7 @@ function hightlightTextSelection() {
 
             //Change text color to white
             //document.execCommand('foreColor', false, 'white');
-     
+
             //Remove window selection so there is no color clash
             window.getSelection().removeAllRanges();
 
@@ -52,11 +51,12 @@ function hightlightTextSelection() {
 }
 
 /**
- * Loops through document gets content of all selected items
+ * Loops through document to get content of all selected items
  * @param none
  * @returns content of selected items
  */
-function getTextSelection() {
+async function getTextSelection() {
+
     //List of all font tags
     var fontList = document.getElementsByTagName('span');
 
@@ -77,7 +77,7 @@ function getTextSelection() {
 /**
  * Writes text to clipboard
  * @param newClip the text to be written to clipboard
- * @returns nothing
+ * @returns the copied text, or an error message
  */
 async function writeToClipboard(newClip) {
     try {
@@ -88,37 +88,37 @@ async function writeToClipboard(newClip) {
 
         if (writeResult.state == "granted" || writeResult.state == "prompt")
             await navigator.clipboard.writeText(newClip);
+
+        return String(newClip);
     } catch (e) {
-        alert('An error occured writing to the clipboard.');
+        return 'An error occured writing to the clipboard.';
     }
+}
+
+async function copy() {
+    //Get content from selection         
+    var selection = await getTextSelection();
+
+    //Write content of selected text to clipboard    
+    return await writeToClipboard(selection);
 }
 
 document.addEventListener('mouseup', hightlightTextSelection);
 
-/**
- * Listens for a request from the button in the browser.
- * When it sees the getTextSelection request, it returns the selection HTML, as well as the URL and title of the tab.
- */
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-    //If message from background.js is getTextSelection
+    //If message from sender is getTextSelection     
     if (request.method == "getTextSelection") {
-        //Get content from selection
-        var selection = getTextSelection();
-
-        //Append currently selected text to what is already in clipboard
-        writeToClipboard(selection).then(() => {
-            //Send response back to background.ts
+        copy().then(response => {
+            //Send response back to background.ts  
             sendResponse({
-                body: selection,
+                body: response,
                 url: window.location.href,
                 subject: document.title
             });
         });
-    } else
-        //Send back a blank message to background.ts
-        sendResponse({}); // snub them.
+    }
 
-    //Makes listener asynchronous
+    //Make sendResponse asynchronous
     return true;
 });

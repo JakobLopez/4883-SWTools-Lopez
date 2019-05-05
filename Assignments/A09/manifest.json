@@ -3,7 +3,7 @@
       "version": "1.0",
       "author": "Jakob Lopez",
       "description": "Allows for multiple, non-contiguous lines to be copied and saved",
-      "permissions": ["activeTab", "clipboardWrite", "clipboardRead"],
+      "permissions": ["activeTab", "clipboardWrite"],
       "background": {
           "scripts": ["background.js"],
           "persistent": false
