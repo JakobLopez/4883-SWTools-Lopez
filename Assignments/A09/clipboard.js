@@ -103,6 +103,7 @@ async function copy() {
     return await writeToClipboard(selection);
 }
 
+
 document.addEventListener('mouseup', hightlightTextSelection);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -117,6 +118,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 subject: document.title
             });
         });
+    }
+    else if (request.method == "disable") {
+        document.removeEventListener('mouseup', hightlightTextSelection) 
+
+    }
+    else if (request.method == "enable") {
+        document.addEventListener('mouseup', hightlightTextSelection) 
+     
     }
 
     //Make sendResponse asynchronous
