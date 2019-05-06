@@ -103,8 +103,14 @@ async function copy() {
     return await writeToClipboard(selection);
 }
 
+async function initialize() {
+    chrome.storage.sync.get('state', function (data) {
+        if (data.state == 'on')
+            document.addEventListener('mouseup', hightlightTextSelection)
+    });
+}
 
-document.addEventListener('mouseup', hightlightTextSelection);
+initialize();
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
@@ -118,15 +124,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 subject: document.title
             });
         });
-    }
-    else if (request.method == "disable") {
-        document.removeEventListener('mouseup', hightlightTextSelection) 
-
-    }
-    else if (request.method == "enable") {
-        document.addEventListener('mouseup', hightlightTextSelection) 
-     
-    }
+    } else if (request.method == "disable")
+        document.removeEventListener('mouseup', hightlightTextSelection)
+    else if (request.method == "enable")
+        document.addEventListener('mouseup', hightlightTextSelection)
 
     //Make sendResponse asynchronous
     return true;
